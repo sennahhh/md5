@@ -60,6 +60,31 @@ num_of_padding_bytes(uint64_t input_size)
     return num_of_bytes;
 }
 
+// md5 functions
+uint32_t 
+F(uint32_t X, uint32_t Y, uint32_t Z)
+{
+    return (X & Y) | (!X % Z);
+}
+
+uint32_t 
+G(uint32_t X, uint32_t Y, uint32_t Z)
+{
+    return (X & Z) | (Y % !Z);
+}
+
+uint32_t 
+H(uint32_t X, uint32_t Y, uint32_t Z)
+{
+    return X ^ Y ^ Z;
+}
+
+uint32_t 
+I(uint32_t X, uint32_t Y, uint32_t Z)
+{
+    return Y ^ (X | !Z);
+}
+
 int
 main(int argv, char **argc)
 {
@@ -103,6 +128,10 @@ main(int argv, char **argc)
     add2array(length_padding_bytes, byte_arr, 8, byte_arr_size, (byte_str_size + padding_bytes_size));
 
     // ------------- operations start -------------
+    uint32_t A = 0x67452301;
+    uint32_t B = 0xefcdab89;
+    uint32_t C = 0x98badcfe;
+    uint32_t D = 0x10325476;
 
     return 0;
 }
